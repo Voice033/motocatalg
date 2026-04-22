@@ -3,17 +3,23 @@ package jp.co.planaria.sample.motocatalog.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import lombok.extern.slf4j.Slf4j;
 
 import jp.co.planaria.sample.motocatalog.bean.Brand;
 import jp.co.planaria.sample.motocatalog.bean.Motorcycle;
 
 @Controller
+@Slf4j //ログ部分を使えるようになる
 public class MotosController {
+
+    
+    //private static final Logger log = LoggerFactory.getLogger(clazz : MotosController.class);
 
     @RequestMapping("/hello")
     public String hello(@RequestParam String name, Model model){
@@ -38,6 +44,9 @@ public class MotosController {
 
          model.addAttribute("brands",brands);
          model.addAttribute("motos",motos);
+
+         log.info("mots:{}",motos); //ログ出力する
+
         return "moto_list";
     }
 }
