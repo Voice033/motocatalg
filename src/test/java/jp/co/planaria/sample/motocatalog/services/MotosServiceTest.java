@@ -21,6 +21,13 @@ public class MotosServiceTest {
 
         List <Motorcycle> motos = service.getMotos();
         //検索結果の件数確認
-        assertThat(motos.size()).isEqualTo(10);
+        assertThat(motos.size()).isEqualTo(2);
+        //検索結果の各項目の確認
+        Motorcycle moto = motos.get(0); //1件目
+        assertThat(moto).isNotNull();
+        assertThat(moto.getMotoNo()).isEqualTo(1); 
+        assertThat(moto.getMotoName()).isEqualTo("GB350");
+        assertThat(moto.getPrice()).isEqualTo(550000);
+        assertThat(moto.getBrandId().getBrandName()).isEqualTo("Honda");
     }
 }
