@@ -14,3 +14,8 @@ services:
       - 3306:3306 #コンテナ外部からアクセスできるようにする
       - 33060:33060
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9000:8080
