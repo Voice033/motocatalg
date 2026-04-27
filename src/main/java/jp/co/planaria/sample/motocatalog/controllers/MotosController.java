@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.co.planaria.sample.motocatalog.beans.Brand;
 import jp.co.planaria.sample.motocatalog.beans.Motorcycle;
-import jp.co.planaria.sample.motocatalog.beans.SearchCondition;
+import jp.co.planaria.sample.motocatalog.beans.SearchForm;
 import jp.co.planaria.sample.motocatalog.services.MotosService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,23 +31,54 @@ public class MotosController {
         model.addAttribute("name", name);
         return "test";
     }
-
+    
+    /**
+     * バイク一覧を検索する
+     * @param searchForm 検索条件
+     * @param model Model
+     * @return 遷移先
+     */
     @GetMapping("/motos")
-    public String motos(Model model){
-        //ブランド        
-        List<Brand> brands = new ArrayList<>();
-        brands = service.getBrands();
+    public String motos(SearchForm searchForm, Model model){
+        log.info("検索条件{}", searchForm);
+        //ブランドリストを準備   
+        this.setBrands(model);
 
         //バイク
         List<Motorcycle> motos = new ArrayList<>();
-        SearchCondition condition = new SearchCondition();
-        motos = service.getMotos(condition);
+        motos = service.getMotos(searchForm);
 
-         model.addAttribute("brands",brands);
          model.addAttribute("motos",motos);
 
          log.debug("mots:{}",motos); //ログ出力する
 
         return "moto_list";
+    }
+    
+    /**
+     * 検索条件をクリアする
+     * @param searchForm　検索条件
+     * @param model model
+     * @return 遷移先
+     */
+    @GetMapping("/motos/reset")
+    public String reset(SearchForm searchForm, Model model){
+        //ブランドリストを準備
+        this.setBrands(model);
+
+        //検索条件のクリア
+        searchForm = new SearchForm();
+        return "moto_list";
+    }
+    
+    /**
+     * ブランドリストをModelにセットする
+     * @param model Model
+     */
+    private void setBrands(Model model){
+         List<Brand> brands = new ArrayList<>();
+         brands = service.getBrands();
+         model.addAttribute("brands", brands);
+
     }
 }
