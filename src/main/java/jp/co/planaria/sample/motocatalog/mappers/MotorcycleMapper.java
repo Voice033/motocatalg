@@ -5,8 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
+
 import jp.co.planaria.sample.motocatalog.beans.Motorcycle;
 import jp.co.planaria.sample.motocatalog.beans.SearchForm;
+
+
 
 @Mapper
 public interface MotorcycleMapper {
@@ -29,6 +32,6 @@ public interface MotorcycleMapper {
      * @param moto バイク情報
      * @return 更新件数
      */
-    @Update("UPDATE m_motocycle SET moto_name = #{motoName} , seat_height = #{seatHeight} , cylinder = #{cylinder} , cooling = #{cooling} , price = #{price} , comment = #{comment} , brand_id = #{brandId.brandId} , version = version + 1 , ins_dt = #{insDt} , upd_dt = #{updDt} WHERE moto_no = #{motoNo}")
+    @Update("UPDATE m_motocycle SET moto_name = #{motoName}, seat_height = #{seatHeight} , cylinder = #{cylinder} , cooling = #{cooling} , price = #{price} , comment = #{comment} , brand_id = #{brandId.brandId} , version = version + 1 , ins_dt = #{insDt} , upd_dt = #{updDt} WHERE moto_no = #{motoNo}")
     public int update(Motorcycle moto);
 }

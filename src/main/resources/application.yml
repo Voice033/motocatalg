@@ -1,12 +1,16 @@
 spring:
     datasource:
-        url: "jdbc:mysql://localhost/motocatalogdb"
+        url: jdbc:mysql://localhost:3306/motocatalogdb
         username: develop
         password: develop
+        driver-class-name: com.mysql.cj.jdbc.Driver
     sql:
         init:
-            mode: always
+            mode: never
             encoding: UTF-8
+    profiles:
+        active: test
+        
 logging:
     level:
         root: info
