@@ -79,6 +79,14 @@ public class MotosController {
         searchForm = new SearchForm();
         return "moto_list";
     }
+
+    @GetMapping("/motos/{motoNo}")
+    public String initUpdate(Model model){
+            //ブランドリストを準備
+        this.setBrands(model);
+
+        return "moto";
+    }
     
     /**
      * ブランドリストをModelにセットする
