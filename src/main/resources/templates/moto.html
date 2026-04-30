@@ -32,6 +32,11 @@
     <div class="container">
         <form method="post" th:object="${motoForm}" th:action="@{/motos/save}">
             <div class="row">
+                <div class="col">
+                    <div class="alert alert-danger" role="alert" th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="row">
                     <div class="col">
                         <label for="brand" class="form-label">番号</label>
@@ -42,7 +47,8 @@
                 </div>
                 <div class="col">
                     <label for="brand" class="form-label">メーカー</label>
-                    <select th:field="*{brandId.brandId}" class="form-select" id="brand" aria-label="Default select example">
+                    <select th:field="*{brandId.brandId}" class="form-select" id="brand"
+                        aria-label="Default select example">
                         <option value=" "></option>
                         <option th:each="brand:${brands}" th:text="${brand.brandName}" th:value="${brand.brandId}">
                         </option>
