@@ -1,4 +1,4 @@
-Drop table if exists m_motocycle;
+DROP TABLE IF EXISTS m_motocycle;
 CREATE TABLE m_motocycle (
     moto_no INT NOT NULL PRIMARY KEY COMMENT 'バイク番号',
     moto_name VARCHAR(100) COMMENT 'バイク名',

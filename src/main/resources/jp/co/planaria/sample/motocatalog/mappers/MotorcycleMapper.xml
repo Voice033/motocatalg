@@ -11,6 +11,9 @@
     <result property="cooling" column="cooling" />
     <result property="price" column="price" />
     <result property="comment" column="comment" />
+    <result property="insDt" column="ins_dt" />
+    <result property="updDt" column="upd_dt" />
+    <result property="version" column="version" />
     <association property="brandId" javaType="jp.co.planaria.sample.motocatalog.beans.Brand" autoMapping="true">
     </association>
   </resultMap>
