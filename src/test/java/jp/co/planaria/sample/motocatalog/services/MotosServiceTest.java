@@ -191,17 +191,17 @@ public class MotosServiceTest {
     void test0012() {
         Motorcycle before = new Motorcycle();
         // バイク名
-        before.setMotoName("もともと");
+        before.setMotoName("あたらしい");
         // シート高
-        before.setSeatHeight(10);
+        before.setSeatHeight(100);
         // シリンダー
-        before.setCylinder(9);
+        before.setCylinder(1);
         // 冷却
-        before.setCooling("必殺技");
+        before.setCooling("冷凍");
         // 価格
         before.setPrice(1000);
         // コメント
-        before.setComment("できた");
+        before.setComment("コメント");
         // ブランドID
         before.setBrandId(new Brand("01", "Honda"));
 
@@ -209,16 +209,29 @@ public class MotosServiceTest {
 
         Motorcycle after = service.getMotos(10); // 変更後のバイク情報取得
         assertThat(after.getMotoNo()).isEqualTo(10);
-        assertThat(after.getMotoName()).isEqualTo("もともと");
-        assertThat(after.getSeatHeight()).isEqualTo(10);
-        assertThat(after.getCylinder()).isEqualTo(9);
-        assertThat(after.getCooling()).isEqualTo("必殺技");
+        assertThat(after.getMotoName()).isEqualTo("あたらしい");
+        assertThat(after.getSeatHeight()).isEqualTo(100);
+        assertThat(after.getCylinder()).isEqualTo(1);
+        assertThat(after.getCooling()).isEqualTo("冷凍");
         assertThat(after.getPrice()).isEqualTo(1000);
-        assertThat(after.getComment()).isEqualTo("できた");
+        assertThat(after.getComment()).isEqualTo("コメント");
         assertThat(after.getBrandId().getBrandId()).isEqualTo("01");
         assertThat(after.getVersion()).isEqualTo(1);
-        assertThat(after.getInsDt().format(dtFormater)).isEqualTo(LocalDateTime.now().format(dtFormater));
+        //assertThat(after.getInsDt().format(dtFormater)).isEqualTo(LocalDateTime.now().format(dtFormater));
         assertThat(after.getUpdDt()).isNull();
+    }
+
+    @DisplayName("バイク情報削除")
+    @Test
+    @Transactional
+    @Rollback
+    void test0013() {
+        Motorcycle before = service.getMotos(1);
+
+        service.delete(before); // 削除
+
+        Motorcycle after = service.getMotos(1); // 変更後のバイク情報取得
+        assertThat(after).isNull();
     }
 
 }

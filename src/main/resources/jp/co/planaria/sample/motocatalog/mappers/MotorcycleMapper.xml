@@ -78,7 +78,7 @@
   </select>
   <insert id="insert" parameterType="jp.co.planaria.sample.motocatalog.beans.Motorcycle">
   INSERT 
-INTO m_motocycle( 
+  INTO m_motocycle( 
     moto_no
     , moto_name
     , seat_height
