@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.co.planaria.sample.motocatalog.beans.Brand;
 import jp.co.planaria.sample.motocatalog.beans.Motorcycle;
-import jp.co.planaria.sample.motocatalog.beans.SearchForm;
 import jp.co.planaria.sample.motocatalog.forms.MotoForm;
+import jp.co.planaria.sample.motocatalog.forms.SearchForm;
 import jp.co.planaria.sample.motocatalog.services.MotosService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -110,8 +110,9 @@ public class MotosController {
         return "moto";
     }
 
-/**
-     **登録画面の初期表示
+    /**
+     ** 登録画面の初期表示
+     * 
      * @param motoForm 入力内容
      * @param model    Model
      * @return 遷移先
@@ -120,22 +121,28 @@ public class MotosController {
     public String initNew(@ModelAttribute MotoForm motoForm, Model model) {
         // ブランドリストを準備
         this.setBrands(model);
-        
 
         return "moto";
     }
 
     /**
      * バイク情報を保存する
+     * 
      * @param motoForm 入力内容
-     * @param result BindingResult
-     * @param model Model
-     * @return　遷移先
+     * @param result   BindingResult
+     * @param model    Model
+     * @return 遷移先
      */
     @PostMapping("/motos/save")
-    public String save(@ModelAttribute MotoForm motoForm, BindingResult result, Model model) {
+    public String save(@Validated MotoForm motoForm, BindingResult result, Model model) {
+        // ブランドリストを準備
+        this.setBrands(model);
         try {
             log.info("motoForm:{}", motoForm);
+            if (result.hasErrors()) {
+                // 入力チェックエラーがある場合
+                return "moto";
+            }
             Motorcycle moto = new Motorcycle();
             // 入力内容を詰め替える
             BeanUtils.copyProperties(motoForm, moto);
@@ -147,8 +154,6 @@ public class MotosController {
             return "redirect:/motos";
 
         } catch (OptimisticLockingFailureException e) {
-            // ブランドリストを準備
-            this.setBrands(model);
             result.addError(new ObjectError("global", e.getMessage()));
             return "moto";
 
@@ -158,10 +163,11 @@ public class MotosController {
 
     /**
      * バイク情報を削除する
+     * 
      * @param motoForm 入力内容
-     * @param result BindingResult
-     * @param model Model
-     * @return　遷移先
+     * @param result   BindingResult
+     * @param model    Model
+     * @return 遷移先
      */
     @PostMapping("/motos/delete")
     public String delete(@ModelAttribute MotoForm motoForm, BindingResult result, Model model) {

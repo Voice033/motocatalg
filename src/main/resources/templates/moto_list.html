@@ -80,13 +80,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="moto : ${motos}" >
-                            <th scope="row" th:text="${moto.motoNo}"></th>
-                            <td th:text="${moto.brandId.brandName}"></td>
-                            <td><a th:href="@{/motos/} + ${moto.motoNo}" th:text="${moto.motoName}"></a></td>
-                            <td th:text="${moto.cooling} + ${moto.cylinder}"></td>
-                            <td th:text="${moto.#numbers.formatInteger(moto.price,3,'COMMA')}" class="text-end"></td>
-                            <td th:text="${moto.comment}"></td>
+                        <tr th:each="moto : ${motos}" th:object="${moto}">
+                            <th scope="row" th:text="*{motoNo}"></th>
+                            <td th:text="*{brandId.brandName}"></td>
+                            <td><a th:href="@{/motos/} + *{motoNo}" th:text="*{motoName}"></a></td>
+                            <td><span th:text="*{cooling}"></span> <span th:text="*{cylinder}"></span></td>
+                            <td th:text="*{#numbers.formatInteger(price,3,'COMMA')}" class="text-end"></td>
+                            <td th:text="*{comment}"></td>
                         </tr>
                     </tbody>
                 </table>
