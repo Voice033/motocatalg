@@ -50,7 +50,7 @@
             </div>
             <div class="col-5">
                 <div class="mb-3">
-                    <label for="keyword" class="form-label" th text="#{searchForm.keyword}"></label>
+                    <label for="keyword" class="form-label" th:text="#{searchForm.keyword}"></label>
                     <input type="text" class="form-control"  th:field="${searchForm.keyword}" id="keyword" placeholder="車名もしくはコメントの一部を入力">
                     <div class="text-danger" th:errors="${searchForm.keyword}"></div>
                 </div>
@@ -60,7 +60,7 @@
         </div>
         <div class="row">
             <div class="col d-flex flex-row-reverse">
-                <button type="button" class="btn btn-primary" th:text ="#{btn.new}"></button>
+                <a th:href="@{/motos/new}" class="btn btn-primary" th:text ="#{btn.new}"></a>
                 <a th:href="@{/motos/reset}" class="btn btn-secondary ms-1 me-1" th:text ="#{btn.reset}"></a>
                 <button type="submit" class="btn btn-success" th:text ="#{btn.search}"></button>
             </div>
@@ -72,21 +72,21 @@
                     <thead>
                         <tr>
                             <th scope="col" th:text="#{label.motoNo}" class="text-center"></th>
-                            <th scope="col" th:text="#{label.brand}" class="text-center"></th>>
+                            <th scope="col" th:text="#{label.brand}" class="text-center"></th>
                             <th scope="col" th:text="#{label.motoName}" class="text-center"></th>
                             <th scope="col" th:text="#{label.engine}" class="text-center"></th>
-                            <th scope="col" th:text="#{label.price}" class="text-center"></th>>
+                            <th scope="col" th:text="#{label.price}" class="text-center"></th>
                             <th scope="col" th:text="#{label.comment}" class="text-center"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="moto : ${motos}" th:object="${moto}">
-                            <th scope="row" th:text="*{motoNo}"></th>
-                            <td th:text="*{brandId.brandName}"></td>
-                            <td><a th:href="@{/motos/} + *{motoNo}" th:text="*{motoName}"></a></td>
-                            <td th:text="*{cooling} + *{cylinder}"></td>
-                            <td th:text="*{#numbers.formatInteger(price,3,'COMMA')}" class="text-end"></td>
-                            <td th:text="*{comment}"></td>
+                        <tr th:each="moto : ${motos}" >
+                            <th scope="row" th:text="${moto.motoNo}"></th>
+                            <td th:text="${moto.brandId.brandName}"></td>
+                            <td><a th:href="@{/motos/} + ${moto.motoNo}" th:text="${moto.motoName}"></a></td>
+                            <td th:text="${moto.cooling} + ${moto.cylinder}"></td>
+                            <td th:text="${moto.#numbers.formatInteger(moto.price,3,'COMMA')}" class="text-end"></td>
+                            <td th:text="${moto.comment}"></td>
                         </tr>
                     </tbody>
                 </table>
