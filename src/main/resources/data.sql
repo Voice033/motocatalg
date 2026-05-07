@@ -16,3 +16,7 @@ INSERT INTO m_brand (brand_id, brand_name) VALUES ('02', 'Kawasaki');
 INSERT INTO m_brand (brand_id, brand_name) VALUES ('03', 'Yamaha');
 INSERT INTO m_brand (brand_id, brand_name) VALUES ('04', 'Suzuki');
 INSERT INTO m_brand (brand_id, brand_name) VALUES ('05', 'moto guzzi');
+
+-- ユーザーのデータ --
+INSERT INTO m_user (username, password) VALUES ('test', '$2a$10$KdOtww8ZlMa2hskR5ME9tuBSU/jPYZaR36EHYgeZ8QeDEzr39fslu');
+INSERT INTO m_user (username, password) VALUES ('admin', '$2a$10$KdOtww8ZlMa2hskR5ME9tuBSU/jPYZaR36EHYgeZ8QeDEzr39fslu');

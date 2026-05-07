@@ -16,7 +16,7 @@
     <title th:text="#{site.title}"></title>
     <style>
         body {
-             font-family: "M PLUS 1p", sans-serif;
+            font-family: "M PLUS 1p", sans-serif;
         }
     </style>
 </head>
@@ -27,44 +27,49 @@
     <nav class="navbar navbar-dark bg-dark mb-3">
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h1" th:text="#{page.search}"></span>
+            <form th:action="@{/logout}" method="post">
+                <button class="btn btn-secondary">ログアウト</button>
+            </form>
         </div>
     </nav>
     <div class="container">
         <form th:action="@{/motos}" method="get">
-        <div class="row justify-content-end">
-            <div class="col-2">
-                 <div th:text="${#temporals.format(dateTime, 'yyyy/MM/dd HH:mm:ss')}"></div>
+            <div class="row justify-content-end">
+                <div class="col-2">
+                    <div th:text="${#temporals.format(dateTime, 'yyyy/MM/dd HH:mm:ss')}"></div>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-around">
-            <div class="col-3">
-                <div class="mb-3">
-                    <label for="brand" class="form-label" th:text="#{searchForm.brand}"></label>
-                    <select class="form-select" th:field="${searchForm.brandId}" id="brand" aria-label="Default select example">
-                        <option value=" "></option>
-                        <option th:each="brand:${brands}" th:text="${brand.brandName}" th:value="${brand.brandId}">
-                        </option>
-                    </select>
+            <div class="row justify-content-around">
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="brand" class="form-label" th:text="#{searchForm.brand}"></label>
+                        <select class="form-select" th:field="${searchForm.brandId}" id="brand"
+                            aria-label="Default select example">
+                            <option value=" "></option>
+                            <option th:each="brand:${brands}" th:text="${brand.brandName}" th:value="${brand.brandId}">
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-5">
+                    <div class="mb-3">
+                        <label for="keyword" class="form-label" th:text="#{searchForm.keyword}"></label>
+                        <input type="text" class="form-control" th:field="${searchForm.keyword}" id="keyword"
+                            placeholder="車名もしくはコメントの一部を入力">
+                        <div class="text-danger" th:errors="${searchForm.keyword}"></div>
+                    </div>
+
                 </div>
 
             </div>
-            <div class="col-5">
-                <div class="mb-3">
-                    <label for="keyword" class="form-label" th:text="#{searchForm.keyword}"></label>
-                    <input type="text" class="form-control"  th:field="${searchForm.keyword}" id="keyword" placeholder="車名もしくはコメントの一部を入力">
-                    <div class="text-danger" th:errors="${searchForm.keyword}"></div>
+            <div class="row">
+                <div class="col d-flex flex-row-reverse">
+                    <a th:href="@{/motos/new}" class="btn btn-primary" th:text="#{btn.new}"></a>
+                    <a th:href="@{/motos/reset}" class="btn btn-secondary ms-1 me-1" th:text="#{btn.reset}"></a>
+                    <button type="submit" class="btn btn-success" th:text="#{btn.search}"></button>
                 </div>
-
             </div>
-
-        </div>
-        <div class="row">
-            <div class="col d-flex flex-row-reverse">
-                <a th:href="@{/motos/new}" class="btn btn-primary" th:text ="#{btn.new}"></a>
-                <a th:href="@{/motos/reset}" class="btn btn-secondary ms-1 me-1" th:text ="#{btn.reset}"></a>
-                <button type="submit" class="btn btn-success" th:text ="#{btn.search}"></button>
-            </div>
-        </div>
         </form>
         <div class="row">
             <div class="col">
